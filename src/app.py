@@ -61,7 +61,8 @@ def handle_members():
 @app.route('/members/<int:id>', methods=['GET'])
 def handle_member_id(id):
     member = jackson_family.get_member(id)
-    return jsonify(member), 200
+    status_code = 400 if member is False else 200
+    return jsonify(member), status_code
 
 
 @app.route('/members', methods=['POST'])
@@ -71,7 +72,7 @@ def handle_add_member():
     required_fields = ["first_name", "age", "lucky_numbers"]
     for field in required_fields:
         if field not in request_body:
-            return jsonify({"error": f" '{field}' es requerido o no es correcto"}), 400
+            return jsonify({"error": f" '{field}' es requerido."}), 400
 
     if not isinstance(request_body['first_name'], str):
         return jsonify({"error": "'first_name' debe ser un string"}), 400
