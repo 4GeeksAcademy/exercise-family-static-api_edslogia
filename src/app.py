@@ -37,8 +37,6 @@ jackson_family.add_member(members[0])
 jackson_family.add_member(members[1])
 jackson_family.add_member(members[2])
 
-print("miembros", len(jackson_family._members))
-
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
@@ -68,8 +66,8 @@ def handle_member_id(id):
 @app.route('/members', methods=['POST'])
 def handle_add_member():
     request_body = request.json
-
     required_fields = ["first_name", "age", "lucky_numbers"]
+
     for field in required_fields:
         if field not in request_body:
             return jsonify({"error": f" '{field}' es requerido."}), 400
