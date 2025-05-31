@@ -86,8 +86,9 @@ def handle_add_member():
 
 @app.route('/members/<int:id>', methods=['DELETE'])
 def handle_delete_member(id):
-    jackson_family.delete_member(id)
-    return jsonify({"done": True}), 200
+    response = jackson_family.delete_member(id)
+    status_code = 200 if response else 400 
+    return jsonify({"done": response}), status_code
 
 
 # This only runs if `$ python src/app.py` is executed

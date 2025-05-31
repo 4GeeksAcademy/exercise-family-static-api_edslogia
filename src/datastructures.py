@@ -28,7 +28,7 @@ class FamilyStructure:
             if member["id"] == id:
                 self._members.pop(i)
                 return True
-        return None
+        return False
 
     def get_member(self, id): 
          for i, member in enumerate(self._members):
@@ -36,7 +36,7 @@ class FamilyStructure:
                 member_return = self._members[i]
                 del member_return["last_name"]
                 return member_return
-         return None
+         return False
 
     # This method is done, it returns a list with all the family members
     def get_all_members(self):
